@@ -38,7 +38,11 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    const binaryAlphanumericChars = expr.match(/.{1,10}/g);
+    const binaryMorseChars = binaryAlphanumericChars.map((item) => item.match(/.{1,2}/g));
+    const morseChars = binaryMorseChars.map((item) => item.map((char) => char = (char === '00') ? '' : (char === '10') ? '.' : (char === '11') ? '-' : '*').join(''));
+
+    return morseChars.map((item) => item = (MORSE_TABLE[item]) ? MORSE_TABLE[item] : ' ').join('');
 }
 
 module.exports = {
